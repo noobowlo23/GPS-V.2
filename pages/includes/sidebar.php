@@ -38,7 +38,7 @@ function isActive($data)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="../home/" class="brand-link">
         <img src="../../assets/images/logo.png" alt="Admin Logo" class="brand-image img-circle elevation-3">
-        <!-- <span class="brand-text font-weight-light">KDR GPS</span> --><br>
+        <span class="brand-text font-weight-light">KDR GPS</span><br>
     </a>
     <div class="sidebar">
         <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -54,17 +54,23 @@ function isActive($data)
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="../home/" class="nav-link <?php echo isActive('home') ?>">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-home-alt"></i>
                         <p>Home</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="../dashboard/" class="nav-link <?php echo isActive('dashboard') ?>">
-                        <i class="nav-icon fas fa-user-cog"></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="../reportcar/" class="nav-link <?php echo isActive('reportcar') ?>">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>Report</p>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
                     <div class="sidenav">
                         <button class="dropdown-btn">Report
                             <i class="fa fa-caret-down"></i>
@@ -74,7 +80,7 @@ function isActive($data)
                             <a href="../reportday/" class="nav-link <?php echo isActive('reportday') ?>">สรุปกิจกรรมประจำวัน (ตามช่วงเวลา)</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-header">บัญชีของเรา</li>
                 <li class="nav-item">
                     <a href="../logout.php" id="logout" class="nav-link">

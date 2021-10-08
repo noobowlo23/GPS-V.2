@@ -66,7 +66,7 @@ require_once('../authen.php');
                         </div>
                     </div> -->
 
-                    <div class="row  my-3">
+                    <div class="row  my-auto">
                         <div class="col-md-12">
                             <div class="card shadow bg-light">
                                 <div class="row g-0">
