@@ -14,8 +14,8 @@ require_once('../authen.php');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>หน้าหลัก | AppzStory</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <title>KDR GPS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/logo.png">
     <!-- stylesheet -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
@@ -26,7 +26,7 @@ require_once('../authen.php');
     <div class="wrapper">
         <?php include_once('../includes/sidebar.php') ?>
         <?php include_once('../../assets/cdn.html') ?>
-        <div class="content-wrapper pt-3">
+        <div class="content pt-3">
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
@@ -80,7 +80,7 @@ require_once('../authen.php');
                 </div>
             </div>
         </div>
-        <?php include_once('../includes/footer.php') ?>
+        <!-- <?php include_once('../includes/footer.php') ?> -->
     </div>
 
 
