@@ -44,7 +44,9 @@ function isActive($data)
         </ul>
         <span class="navbar-text">
             <li class="nav-item d-md-block d-none">
-                <a class="nav-link">เข้าสู่ระบบครั้งล่าสุด: <?php echo $_SESSION['AD_LOGIN'] ?> </a>
+            <a href="../logout.php" id="logout" class="nav-link">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+               ออกจากระบบ</a>
             </li>
         </span>
     </div>
