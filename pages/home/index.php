@@ -22,7 +22,7 @@ require_once('../authen.php');
     <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onload="init();">
     <div class="wrapper">
         <?php include_once('../includes/sidebar.php') ?>
         <?php include_once('../../assets/cdn.html') ?>
@@ -30,42 +30,6 @@ require_once('../authen.php');
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <!-- <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <div class="small-box bg-info shadow">
-                                <div class="inner text-center">
-                                    <h1 class="py-3">&nbsp;Dashboard&nbsp;</h1>
-                                </div>
-                                <a href="../manager/" class="small-box-footer py-3"> คลิกจัดการระบบ <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="small-box bg-primary shadow">
-                                <div class="inner text-center">
-                                    <h1 class="py-3">รายชื่อลูกค้า</h1>
-                                </div>
-                                <a href="../members/" class="small-box-footer py-3"> คลิกจัดการระบบ <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-6">
-                            <div class="small-box bg-success shadow">
-                                <div class="inner text-center">
-                                    <h1 class="py-3">รายการสินค้า</h1>
-                                </div>
-                                <a href="../products/" class="small-box-footer py-3"> คลิกจัดการระบบ <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="small-box bg-danger shadow">
-                                <div class="inner text-center">
-                                    <h1 class="py-3">รายการสั่งซื้อ</h1>
-                                </div>
-                                <a href="../orders/" class="small-box-footer py-3"> คลิกจัดการระบบ <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="row  my-auto">
                         <div class="col-md-12">
                             <div class="card shadow bg-light">
@@ -231,9 +195,9 @@ require_once('../authen.php');
                                         <script type="text/javascript" src="https://api.longdo.com/map/?key=0e2384cd542e68a77e96b5df4516be86"></script>
                                         <script>
                                             function init() {
-                                                var map = new longdo.Map({
-                                                    placeholder: document.getElementById('map')
-                                                });
+                                                // var map = new longdo.Map({
+                                                //     placeholder: document.getElementById('map')
+                                                // });
                                                 map.location({
                                                     lon: 100.627899,
                                                     lat: 13.327583
@@ -241,11 +205,9 @@ require_once('../authen.php');
                                                 map.zoom(6, true);
                                             }
                                         </script>
-
-                                        <!-- <body onload="init();">
-                                            <div id="map"></div>
-                                            <div id="result"></div>
-                                        </body> -->
+<!-- 
+                                        <div id="map"></div>
+                                        <div id="result"></div> -->
 
                                     </div>
 
@@ -253,8 +215,6 @@ require_once('../authen.php');
                             </div>
                         </div>
                     </div>
-
-
 
                     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -264,35 +224,50 @@ require_once('../authen.php');
                             el: '#app',
                             data() {
                                 return {
-                                    ti: "sdd",
-                                    weidu: [],
                                     jingdu: [],
+                                    weidu: [],
                                     daall: [],
+
                                 }
                             },
                             mounted() {
-                                let vm = this;
+                                var vm = this;
                                 axios.get('http://openapi.18gps.net/GetDateServices.asmx/loginSystem?LoginName=monitor&LoginPassword=123456&LoginType=ENTERPRISE&language=cn&ISMD5=0&timeZone=+08&apply=APP&loginUrl=http://vipapi.18gps.net/')
                                     .then((resp1) => {
                                         urllog = resp1;
                                         logmds = urllog.data.mds;
+                                        logid = urllog.data.id;
 
                                         const pp1 = 'http://api.18gps.net//GetDateServices.asmx/GetDate?method=getDeviceList&mds='
                                         axios.get(pp1 + logmds)
                                             .then((resp2) => {
                                                 daal = resp2;
                                                 vm.daall = daal.data.rows;
+
                                             })
-                                        const school = 'http://api.18gps.net//GetDateServices.asmx/GetDate?timestamp=1508228270718&method=queryLocalAlarmInfoUtc&school_id=c004c7f7-4090-4687-b22e-206e2580ee9f&mds=';
-                                        const cs = '&max_time=1508103827687&type=json'
-                                        axios.get(school + logmds + cs)
+                                        const school = 'http://api.18gps.net//GetDateServices.asmx/GetDate?timestamp=1508228270718&method=queryLocalAlarmInfoUtc&school_id=';
+                                        const idmds = '&mds=';
+                                        const cs = '&max_time=1508103827687&type=custom'
+                                        axios.get(school + logid + idmds + logmds + cs)
                                             .then((resp3) => {
                                                 dat = resp3;
+
                                                 for (let i = 0; i < dat.data.rows.length; i++) {
+
                                                     vm.jingdu = dat.data.rows[i].jingdu;
                                                     vm.weidu = dat.data.rows[i].weidu;
 
+                                                    // console.log(jingdu)
+                                                    // console.log(weidu)
+
+                                                    var marker = new longdo.Marker({
+
+                                                        lon: vm.jingdu,
+                                                        lat: vm.weidu
+                                                    });
+                                                    map.Overlays.add(marker);
                                                 }
+
                                             })
 
                                             .catch((err) => {
@@ -301,15 +276,16 @@ require_once('../authen.php');
                                     });
                             }
                         })
+                        var map = new longdo.Map({
+                            placeholder: document.getElementById('map')
+                        });
                     </script>
+
                     <script>
                         new Vue({
                             el: '#app1',
                             data() {
                                 return {
-                                    ti: "sdd",
-                                    weidu: [],
-                                    jingdu: [],
                                     daall1: [],
                                 }
                             },
